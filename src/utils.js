@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 
-const apiKey = "c41a6f74c7msh6d7cb51d9347812p14169bjsn91f668c00fc8";
+const apiKey = "API_KEY";
 const apiHost = "chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com";
 const apiUrl = "https://chatgpt-chatgpt3-5-chatgpt4.p.rapidapi.com/gpt4";
 
