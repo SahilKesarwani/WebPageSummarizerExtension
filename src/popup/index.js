@@ -15,13 +15,15 @@ const onBtnClick = async getData => {
 	const getSummaryBtn = document.getElementById("get-summary");
 	const getMajorPointsBtn = document.getElementById("get-major-points");
 
+	const result = document.getElementsByClassName("result")[0];
 	const loader = document.getElementById("loader");
-	const result = document.getElementById("result");
+	const text = document.getElementById("text");
 
 	getSummaryBtn.disabled = true;
 	getMajorPointsBtn.disabled = true;
 
-	result.innerText = "";
+	result.style.display = "none";
+	text.innerText = "";
 	loader.style.display = "block";
 
 	const activeTab = await getActiveTabURL();
@@ -30,7 +32,8 @@ const onBtnClick = async getData => {
 	const data = await getData(content);
 
 	loader.style.display = "none";
-	result.innerText = data;
+	text.innerText = data;
+	result.style.display = "block";
 
 	getSummaryBtn.disabled = false;
 	getMajorPointsBtn.disabled = false;
@@ -40,11 +43,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 	const getSummaryBtn = document.getElementById("get-summary");
 	const getMajorPointsBtn = document.getElementById("get-major-points");
 
+	const result = document.getElementsByClassName("result")[0];
+	const copyTextBtn = document.getElementById("copy-btn");
+	const text = document.getElementById("text");
+
 	getSummaryBtn.addEventListener("click", () => {
 		onBtnClick(getSummary);
 	});
 
 	getMajorPointsBtn.addEventListener("click", () => {
 		onBtnClick(getMajorPoints);
+	});
+
+	copyTextBtn.addEventListener("click", () => {
+		result.classList.add("active");
+		copyTextBtn.disabled = true;
+		navigator.clipboard.writeText(text.innerText);
+		setTimeout(() => {
+			copyTextBtn.disabled = false;
+			result.classList.remove("active");
+		}, 2000);
 	});
 });
